@@ -1,14 +1,10 @@
-import time
-
-import pytest
-
 from entities.customer import Customer
 from pages.main_page import MainPage
 from utils.sql_statements import city_london, all_customers
 from utils.utils import get_random_string, random_picker
 
 
-def test_1_task(setup_browser):
+def test_check_contact_name_and_address(setup_browser):
     MainPage().go_to_main_page()
     MainPage().set_and_run_sql(all_customers)
     customers_list = MainPage().make_customers_list()
@@ -16,14 +12,14 @@ def test_1_task(setup_browser):
                customer.contact_name == 'Giovanni Rovelli' and customer.address == 'Via Ludovico il Moro 22')
 
 
-def test_2_task(setup_browser):
+def test_check_london_customers(setup_browser):
     MainPage().go_to_main_page()
     MainPage().set_and_run_sql(city_london)
     customers_list = MainPage().make_customers_list()
     assert len(customers_list) == 6
 
 
-def test_3_task(setup_browser):
+def test_insert_new_customer(setup_browser):
     MainPage().go_to_main_page()
     customer = Customer(['99', 'Detective agency', 'Sherlock Holmes', 'Baker st. 221', 'London', 'NW1', 'UK'])
     MainPage().insert_customer(customer)
@@ -32,7 +28,7 @@ def test_3_task(setup_browser):
     assert customer in customers_list
 
 
-def test_4_task(setup_browser):
+def test_update_customer(setup_browser):
     MainPage().go_to_main_page()
     MainPage().set_and_run_sql(all_customers)
     customers_list = MainPage().make_customers_list()
@@ -49,7 +45,7 @@ def test_4_task(setup_browser):
     assert customer in customers_list
 
 
-def test_5_task(setup_browser):
+def test_delete_customer(setup_browser):
     MainPage().go_to_main_page()
     MainPage().set_and_run_sql(all_customers)
     customers_list = MainPage().make_customers_list()

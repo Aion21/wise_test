@@ -1,5 +1,3 @@
-import time
-
 from selene import be, query, have
 from selene.support.shared import browser
 
